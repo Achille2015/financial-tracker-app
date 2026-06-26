@@ -59,3 +59,10 @@ src/
 ## GitHub
 
 Repository: https://github.com/Achille2015/financial-tracker-app
+
+```bash
+ git add -A
+ git commit -m "<clear, description message>"
+ git push
+ ```
+Use concise commit message that describes what changed(e.g. 'Add streak reset on delete', 'Fix streak calculation off-by-one'

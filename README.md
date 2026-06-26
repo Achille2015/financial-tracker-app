@@ -65,3 +65,9 @@ src/
 ## Data persistence
 
 Transactions are stored under the key `budget-tracker.transactions.v1` in `localStorage`. Clearing browser data will erase all entries. No data is ever sent to a server.
+
+## Git Workflow
+
+After completing any meaningful change, commit and push to GitHub:
+
+ 
