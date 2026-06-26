@@ -4,6 +4,7 @@ import { Dashboard } from "./components/Dashboard";
 import { TransactionForm } from "./components/TransactionForm";
 import { TransactionList } from "./components/TransactionList";
 import { useBudget } from "./hooks/useBudget";
+import { useDarkMode } from "./hooks/useDarkMode";
 import { useTransactions } from "./hooks/useTransactions";
 
 const currentMonth = new Date().toISOString().slice(0, 7);
@@ -60,6 +61,7 @@ const SEED_MORE: SeedTx[] = [
 export default function App() {
   const { transactions, add, remove } = useTransactions();
   const { budgets, setMonthBudget } = useBudget();
+  const { dark, toggle } = useDarkMode();
 
   function loadSampleData() {
     SEED.forEach((tx) => add(tx));
@@ -73,8 +75,15 @@ export default function App() {
   return (
     <div className="app">
       <header className="app__header">
-        <h1>Budget Tracker</h1>
-        <p>Track your income and expenses in one place.</p>
+        <div className="app__header-top">
+          <div>
+            <h1>Budget Tracker</h1>
+            <p>Track your income and expenses in one place.</p>
+          </div>
+          <button className="theme-toggle" onClick={toggle} aria-label="Toggle dark mode">
+            {dark ? "☀ Light" : "☽ Dark"}
+          </button>
+        </div>
         {import.meta.env.DEV && (
           <div className="seed-actions">
             {transactions.length === 0 && (
