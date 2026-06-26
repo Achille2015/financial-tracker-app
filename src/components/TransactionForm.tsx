@@ -46,14 +46,14 @@ export function TransactionForm({ onAdd }: Props) {
       <div className="form__kind">
         <button
           type="button"
-          className={`pill ${kind === "expense" ? "pill--active" : ""}`}
+          className={`pill ${kind === "expense" ? "pill--active-expense" : ""}`}
           onClick={() => handleKindChange("expense")}
         >
           Expense
         </button>
         <button
           type="button"
-          className={`pill ${kind === "income" ? "pill--active" : ""}`}
+          className={`pill ${kind === "income" ? "pill--active-income" : ""}`}
           onClick={() => handleKindChange("income")}
         >
           Income
