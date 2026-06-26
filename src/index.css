@@ -206,6 +206,123 @@ body,
   filter: brightness(1.08);
 }
 
+/* Budget bar */
+.budget {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  border: 1px solid #e2e8f0;
+}
+
+.budget__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.budget__month {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.budget__set-btn {
+  background: none;
+  border: 1.5px solid var(--accent);
+  color: var(--accent);
+  border-radius: 8px;
+  padding: 5px 14px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.budget__set-btn:hover {
+  background: #eff6ff;
+}
+
+.budget__edit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.budget__input {
+  background: var(--surface);
+  color: var(--text);
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font: inherit;
+  font-size: 0.9rem;
+  width: 140px;
+  outline: none;
+}
+
+.budget__input:focus {
+  border-color: var(--accent);
+}
+
+.budget__btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.budget__btn--cancel {
+  background: var(--surface-2);
+  color: var(--muted);
+}
+
+.budget__bar-track {
+  height: 12px;
+  background: var(--surface-2);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.budget__bar-fill {
+  height: 100%;
+  background: var(--income);
+  border-radius: 999px;
+  transition: width 0.4s ease, background 0.3s;
+}
+
+.budget__bar-fill--warn {
+  background: #f59e0b;
+}
+
+.budget__bar-fill--over {
+  background: var(--expense);
+}
+
+.budget__stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.budget__overspent {
+  color: var(--expense);
+  font-weight: 600;
+}
+
+.budget__empty {
+  color: var(--muted);
+  margin: 0;
+  font-size: 0.9rem;
+}
+
 /* Chart */
 .chart__empty,
 .list__empty {
