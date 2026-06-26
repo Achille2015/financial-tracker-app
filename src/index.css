@@ -1,15 +1,15 @@
 :root {
-  --bg: #ffffff;
-  --surface: #f8fafc;
-  --surface-2: #e9eef5;
+  --bg: #eef2ff;
+  --surface: #ffffff;
+  --surface-2: #f1f5f9;
   --text: #0f172a;
   --muted: #64748b;
-  --accent: #3b82f6;
+  --accent: #4f46e5;
   --income: #16a34a;
   --expense: #dc2626;
   --danger: #dc2626;
-  --radius: 12px;
-  --shadow: 0 2px 12px rgba(15, 23, 42, 0.08);
+  --radius: 16px;
+  --shadow: 0 4px 24px rgba(15, 23, 42, 0.07);
 }
 
 * {
@@ -22,25 +22,39 @@ body,
   margin: 0;
   padding: 0;
   min-height: 100%;
-  background: var(--bg);
+  background: linear-gradient(160deg, #eef2ff 0%, #f5f3ff 50%, #eff6ff 100%);
+  background-attachment: fixed;
   color: var(--text);
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
+/* ── Layout ─────────────────────────────────── */
 .app {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 32px 20px 64px;
+  padding: 0 20px 72px;
+}
+
+.app__header {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 55%, #2563eb 100%);
+  margin: 0 -20px 32px;
+  padding: 44px 40px 40px;
+  border-radius: 0 0 28px 28px;
+  box-shadow: 0 8px 32px rgba(79, 70, 229, 0.28);
 }
 
 .app__header h1 {
-  margin: 0 0 4px;
-  font-size: 1.9rem;
+  margin: 0 0 6px;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.03em;
 }
 
 .app__header p {
-  margin: 0 0 24px;
-  color: var(--muted);
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 1rem;
 }
 
 .app__main {
@@ -61,7 +75,7 @@ body,
   }
 }
 
-/* Dashboard cards */
+/* ── Dashboard cards ────────────────────────── */
 .dashboard {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -75,66 +89,86 @@ body,
 }
 
 .card {
-  background: var(--surface);
   border-radius: var(--radius);
-  padding: 20px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   box-shadow: var(--shadow);
-  border: 1px solid #e2e8f0;
-  border-left: 4px solid transparent;
+  color: #ffffff;
 }
 
 .card__label {
-  color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  opacity: 0.78;
 }
 
 .card__value {
-  font-size: 1.7rem;
-  font-weight: 600;
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .card--income {
-  border-left-color: var(--income);
+  background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+  box-shadow: 0 6px 24px rgba(22, 163, 74, 0.28);
 }
 
 .card--expense {
-  border-left-color: var(--expense);
+  background: linear-gradient(135deg, #dc2626 0%, #f87171 100%);
+  box-shadow: 0 6px 24px rgba(220, 38, 38, 0.28);
 }
 
 .card--balance {
-  border-left-color: var(--accent);
+  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+  box-shadow: 0 6px 24px rgba(79, 70, 229, 0.28);
 }
 
-.card--negative .card__value {
-  color: var(--danger);
+.card--balance.card--negative {
+  background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+  box-shadow: 0 6px 24px rgba(220, 38, 38, 0.28);
 }
 
-/* Form */
+/* ── Section cards ──────────────────────────── */
 .form,
 .chart,
-.list {
+.list,
+.budget {
   background: var(--surface);
   border-radius: var(--radius);
-  padding: 20px;
+  padding: 24px;
   box-shadow: var(--shadow);
+}
+
+.form {
+  border-top: 4px solid var(--accent);
+}
+
+.chart {
+  border-top: 4px solid #7c3aed;
+}
+
+.list {
+  border-top: 4px solid #0ea5e9;
 }
 
 .form__title,
 .chart__title,
 .list__title {
-  margin: 0 0 16px;
-  font-size: 1.05rem;
+  margin: 0 0 18px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
+/* ── Kind pills ─────────────────────────────── */
 .form__kind {
   display: flex;
   gap: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .pill {
@@ -143,10 +177,11 @@ body,
   color: var(--muted);
   border: 1.5px solid transparent;
   border-radius: 999px;
-  padding: 8px 12px;
+  padding: 9px 12px;
   cursor: pointer;
   font-weight: 600;
   font-size: 0.9rem;
+  font-family: inherit;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 
@@ -162,6 +197,7 @@ body,
   border-color: var(--income);
 }
 
+/* ── Form fields ────────────────────────────── */
 .form__field {
   display: flex;
   flex-direction: column;
@@ -170,61 +206,81 @@ body,
 }
 
 .form__field span {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 600;
   color: var(--muted);
+  letter-spacing: 0.02em;
 }
 
 .form__field input,
 .form__field select {
-  background: var(--surface);
+  background: var(--surface-2);
   color: var(--text);
-  border: 1.5px solid #cbd5e1;
-  border-radius: 8px;
-  padding: 10px 12px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 10px 14px;
   font: inherit;
+  font-size: 0.95rem;
   outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 
 .form__field input:focus,
 .form__field select:focus {
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
 }
 
 .form__submit {
   width: 100%;
-  margin-top: 8px;
-  background: var(--accent);
+  margin-top: 10px;
   color: white;
   border: none;
-  border-radius: 8px;
-  padding: 12px;
-  font-weight: 600;
+  border-radius: 10px;
+  padding: 13px;
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.95rem;
   cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: filter 0.15s, transform 0.1s;
 }
 
 .form__submit:hover {
   filter: brightness(1.08);
+  transform: translateY(-1px);
 }
 
-/* Budget bar */
+.form__submit:active {
+  transform: translateY(0);
+}
+
+.form__submit--expense {
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.form__submit--income {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+}
+
+/* ── Budget bar ─────────────────────────────── */
 .budget {
-  background: var(--surface);
-  border-radius: var(--radius);
-  padding: 20px;
-  box-shadow: var(--shadow);
-  border: 1px solid #e2e8f0;
+  border-top: 4px solid var(--income);
 }
 
 .budget__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .budget__month {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1rem;
+  letter-spacing: -0.01em;
 }
 
 .budget__set-btn {
@@ -234,13 +290,14 @@ body,
   border-radius: 8px;
   padding: 5px 14px;
   font: inherit;
-  font-size: 0.85rem;
-  font-weight: 500;
+  font-size: 0.82rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: background 0.15s;
 }
 
 .budget__set-btn:hover {
-  background: #eff6ff;
+  background: #eef2ff;
 }
 
 .budget__edit {
@@ -250,9 +307,9 @@ body,
 }
 
 .budget__input {
-  background: var(--surface);
+  background: var(--surface-2);
   color: var(--text);
-  border: 1.5px solid #cbd5e1;
+  border: 1.5px solid #e2e8f0;
   border-radius: 8px;
   padding: 5px 10px;
   font: inherit;
@@ -263,6 +320,7 @@ body,
 
 .budget__input:focus {
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
 }
 
 .budget__btn {
@@ -273,7 +331,7 @@ body,
   padding: 6px 14px;
   font: inherit;
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
 }
 
@@ -283,38 +341,39 @@ body,
 }
 
 .budget__bar-track {
-  height: 12px;
+  height: 14px;
   background: var(--surface-2);
   border-radius: 999px;
   overflow: hidden;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .budget__bar-fill {
   height: 100%;
-  background: var(--income);
+  background: linear-gradient(90deg, #16a34a, #22c55e);
   border-radius: 999px;
-  transition: width 0.4s ease, background 0.3s;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s;
 }
 
 .budget__bar-fill--warn {
-  background: #f59e0b;
+  background: linear-gradient(90deg, #d97706, #f59e0b);
 }
 
 .budget__bar-fill--over {
-  background: var(--expense);
+  background: linear-gradient(90deg, #dc2626, #ef4444);
 }
 
 .budget__stats {
   display: flex;
   justify-content: space-between;
   font-size: 0.88rem;
+  font-weight: 500;
   color: var(--muted);
 }
 
 .budget__overspent {
   color: var(--expense);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .budget__empty {
@@ -323,7 +382,7 @@ body,
   font-size: 0.9rem;
 }
 
-/* Chart */
+/* ── Chart ──────────────────────────────────── */
 .chart__empty,
 .list__empty {
   color: var(--muted);
@@ -334,7 +393,7 @@ body,
   width: 100%;
 }
 
-/* List */
+/* ── Transaction list ───────────────────────── */
 .list__items {
   list-style: none;
   padding: 0;
@@ -346,18 +405,26 @@ body,
 
 .row {
   display: grid;
-  grid-template-columns: 12px 1fr auto auto 32px;
+  grid-template-columns: 12px 1fr auto auto 36px;
   align-items: center;
   gap: 12px;
-  padding: 10px 12px;
+  padding: 12px 16px;
   background: var(--surface-2);
-  border-radius: 8px;
+  border-radius: 12px;
+  border: 1px solid #e8edf5;
+  transition: box-shadow 0.15s, transform 0.1s;
+}
+
+.row:hover {
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+  transform: translateY(-1px);
 }
 
 .row__dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .row__main {
@@ -367,12 +434,13 @@ body,
 }
 
 .row__category {
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 0.92rem;
 }
 
 .row__desc {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -380,12 +448,13 @@ body,
 
 .row__date {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
 }
 
 .row__amount {
-  font-weight: 600;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
+  font-size: 0.95rem;
 }
 
 .row__amount--income {
@@ -400,16 +469,20 @@ body,
   background: transparent;
   color: var(--muted);
   border: none;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   line-height: 1;
   cursor: pointer;
   padding: 0;
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
 }
 
 .row__delete:hover {
-  background: rgba(248, 113, 113, 0.15);
+  background: rgba(220, 38, 38, 0.1);
   color: var(--danger);
 }

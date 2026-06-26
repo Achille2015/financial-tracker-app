@@ -108,8 +108,8 @@ export function TransactionForm({ onAdd }: Props) {
         />
       </label>
 
-      <button type="submit" className="form__submit">
-        Add
+      <button type="submit" className={`form__submit form__submit--${kind}`}>
+        Add {kind === "income" ? "Income" : "Expense"}
       </button>
     </form>
   );
