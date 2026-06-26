@@ -1,0 +1,288 @@
+:root {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface-2: #334155;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+  --income: #22c55e;
+  --expense: #ef4444;
+  --danger: #f87171;
+  --radius: 12px;
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.app {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+}
+
+.app__header h1 {
+  margin: 0 0 4px;
+  font-size: 1.9rem;
+}
+
+.app__header p {
+  margin: 0 0 24px;
+  color: var(--muted);
+}
+
+.app__main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.app__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 800px) {
+  .app__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Dashboard cards */
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid transparent;
+}
+
+.card__label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.card__value {
+  font-size: 1.7rem;
+  font-weight: 600;
+}
+
+.card--income {
+  border-left-color: var(--income);
+}
+
+.card--expense {
+  border-left-color: var(--expense);
+}
+
+.card--balance {
+  border-left-color: var(--accent);
+}
+
+.card--negative .card__value {
+  color: var(--danger);
+}
+
+/* Form */
+.form,
+.chart,
+.list {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+.form__title,
+.chart__title,
+.list__title {
+  margin: 0 0 16px;
+  font-size: 1.05rem;
+}
+
+.form__kind {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.pill {
+  flex: 1;
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.pill--active {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.form__field span {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.form__field input,
+.form__field select {
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font: inherit;
+  outline: none;
+}
+
+.form__field input:focus,
+.form__field select:focus {
+  border-color: var(--accent);
+}
+
+.form__submit {
+  width: 100%;
+  margin-top: 8px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.form__submit:hover {
+  filter: brightness(1.08);
+}
+
+/* Chart */
+.chart__empty,
+.list__empty {
+  color: var(--muted);
+  margin: 0;
+}
+
+.chart__wrap {
+  width: 100%;
+}
+
+/* List */
+.list__items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 12px 1fr auto auto 32px;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: var(--surface-2);
+  border-radius: 8px;
+}
+
+.row__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.row__main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.row__category {
+  font-weight: 500;
+}
+
+.row__desc {
+  color: var(--muted);
+  font-size: 0.85rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.row__date {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.row__amount {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.row__amount--income {
+  color: var(--income);
+}
+
+.row__amount--expense {
+  color: var(--expense);
+}
+
+.row__delete {
+  background: transparent;
+  color: var(--muted);
+  border: none;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+}
+
+.row__delete:hover {
+  background: rgba(248, 113, 113, 0.15);
+  color: var(--danger);
+}
