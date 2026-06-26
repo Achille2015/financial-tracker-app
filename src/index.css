@@ -880,6 +880,43 @@ html.dark .row__dot {
   color: var(--danger);
 }
 
+.list__footer {
+  margin-top: var(--space-5);
+  display: flex;
+  justify-content: flex-start;
+}
+
+.list__clear-btn {
+  background: none;
+  color: var(--text-muted);
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease),
+              color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease);
+  min-height: 36px;
+}
+
+.list__clear-btn:hover {
+  background: var(--expense-soft);
+  color: var(--expense);
+  border-color: var(--expense);
+}
+
+.list__clear-btn:active {
+  transform: scale(0.98);
+}
+
+.list__clear-btn:focus-visible {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+  color: var(--expense);
+  border-color: var(--expense);
+}
+
 /* ─────────────────────────────────────────────
    Dark mode targeted overrides
    ───────────────────────────────────────────── */

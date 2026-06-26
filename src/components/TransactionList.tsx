@@ -4,6 +4,7 @@ import type { Transaction } from "../types";
 interface Props {
   transactions: Transaction[];
   onRemove: (id: string) => void;
+  onClear: () => void;
 }
 
 function formatAmount(t: Transaction): string {
@@ -25,7 +26,7 @@ function formatDate(iso: string): string {
   });
 }
 
-export function TransactionList({ transactions, onRemove }: Props) {
+export function TransactionList({ transactions, onRemove, onClear }: Props) {
   if (transactions.length === 0) {
     return (
       <section className="list">
@@ -38,6 +39,12 @@ export function TransactionList({ transactions, onRemove }: Props) {
   }
 
   const sorted = [...transactions].sort((a, b) => b.date.localeCompare(a.date));
+
+  function handleClear() {
+    if (window.confirm(`Delete all ${transactions.length} transactions? This cannot be undone.`)) {
+      onClear();
+    }
+  }
 
   return (
     <section className="list">
@@ -59,9 +66,7 @@ export function TransactionList({ transactions, onRemove }: Props) {
               )}
             </div>
             <span className="row__date">{formatDate(t.date)}</span>
-            <span
-              className={`row__amount row__amount--${t.kind}`}
-            >
+            <span className={`row__amount row__amount--${t.kind}`}>
               {formatAmount(t)}
             </span>
             <button
@@ -76,6 +81,16 @@ export function TransactionList({ transactions, onRemove }: Props) {
           </li>
         ))}
       </ul>
+      <div className="list__footer">
+        <button
+          type="button"
+          className="list__clear-btn"
+          onClick={handleClear}
+          aria-label="Delete all transactions"
+        >
+          Delete all transactions
+        </button>
+      </div>
     </section>
   );
 }

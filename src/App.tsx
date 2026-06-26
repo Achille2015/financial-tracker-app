@@ -58,7 +58,7 @@ const SEED_MORE: SeedTx[] = [
 
 export default function App() {
   const currentMonth = new Date().toISOString().slice(0, 7);
-  const { transactions, add, remove } = useTransactions();
+  const { transactions, add, remove, clear } = useTransactions();
   const { budgets, setMonthBudget } = useBudget();
   const { dark, toggle } = useDarkMode();
 
@@ -120,7 +120,7 @@ export default function App() {
           <CategoryChart transactions={transactions} />
         </div>
 
-        <TransactionList transactions={transactions} onRemove={remove} />
+        <TransactionList transactions={transactions} onRemove={remove} onClear={clear} />
       </main>
     </div>
   );

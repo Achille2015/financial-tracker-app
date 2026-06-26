@@ -33,5 +33,9 @@ export function useTransactions() {
     setTransactions((prev) => prev.filter((t) => t.id !== id));
   }, []);
 
-  return { transactions, add, remove };
+  const clear = useCallback(() => {
+    setTransactions([]);
+  }, []);
+
+  return { transactions, add, remove, clear };
 }
