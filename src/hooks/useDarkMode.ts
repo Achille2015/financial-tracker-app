@@ -4,9 +4,13 @@ const KEY = "budget-tracker.dark-mode";
 
 export function useDarkMode() {
   const [dark, setDark] = useState(() => {
-    const stored = localStorage.getItem(KEY);
-    if (stored !== null) return stored === "true";
-    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    try {
+      const stored = localStorage.getItem(KEY);
+      if (stored !== null) return stored === "true";
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    } catch {
+      return false;
+    }
   });
 
   useEffect(() => {

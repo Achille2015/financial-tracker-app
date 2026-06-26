@@ -37,6 +37,7 @@ export function TransactionForm({ onAdd }: Props) {
 
     setAmount("");
     setDescription("");
+    setDate(today());
   };
 
   return (

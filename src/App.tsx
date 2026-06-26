@@ -7,8 +7,6 @@ import { useBudget } from "./hooks/useBudget";
 import { useDarkMode } from "./hooks/useDarkMode";
 import { useTransactions } from "./hooks/useTransactions";
 
-const currentMonth = new Date().toISOString().slice(0, 7);
-
 type SeedTx = Parameters<ReturnType<typeof useTransactions>["add"]>[0];
 
 const SEED: SeedTx[] = [
@@ -59,6 +57,7 @@ const SEED_MORE: SeedTx[] = [
 ];
 
 export default function App() {
+  const currentMonth = new Date().toISOString().slice(0, 7);
   const { transactions, add, remove } = useTransactions();
   const { budgets, setMonthBudget } = useBudget();
   const { dark, toggle } = useDarkMode();

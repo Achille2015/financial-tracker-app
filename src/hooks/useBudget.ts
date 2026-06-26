@@ -7,7 +7,10 @@ function load(): Record<string, number> {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return {};
     const parsed = JSON.parse(raw);
-    return typeof parsed === "object" && parsed !== null ? parsed : {};
+    if (typeof parsed !== "object" || parsed === null) return {};
+    return Object.fromEntries(
+      Object.entries(parsed).filter(([, v]) => typeof v === "number" && Number.isFinite(v as number))
+    ) as Record<string, number>;
   } catch {
     return {};
   }

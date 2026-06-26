@@ -44,6 +44,12 @@ html.dark #root {
 }
 
 /* ── Dark mode overrides ────────────────────── */
+html.dark,
+html.dark body,
+html.dark #root {
+  background: linear-gradient(160deg, #0f172a 0%, #1a1040 50%, #0f172a 100%);
+}
+
 html.dark .form,
 html.dark .chart,
 html.dark .list,
@@ -59,13 +65,33 @@ html.dark .card--balance.card--negative {
 }
 
 html.dark .form__field input,
-html.dark .form__field select,
-html.dark .budget__input {
+html.dark .form__field select {
+  background: var(--surface-2);
+  color: var(--text);
   border-color: #475569;
+}
+
+html.dark .form__field select option {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+html.dark .budget__input {
+  background: var(--surface-2);
+  color: var(--text);
+  border-color: #475569;
+}
+
+html.dark .form__field input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
 }
 
 html.dark .row {
   border-color: rgba(255, 255, 255, 0.05);
+}
+
+html.dark .row:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 html.dark .budget__set-btn:hover {
@@ -78,6 +104,20 @@ html.dark .pill--active-expense {
 
 html.dark .pill--active-income {
   background: rgba(22, 163, 74, 0.2);
+}
+
+html.dark .recharts-default-tooltip {
+  background: var(--surface-2) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: var(--text) !important;
+}
+
+html.dark .recharts-tooltip-item {
+  color: var(--text) !important;
+}
+
+html.dark .recharts-legend-item-text {
+  color: var(--text) !important;
 }
 
 /* ── Layout ─────────────────────────────────── */

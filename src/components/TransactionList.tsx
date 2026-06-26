@@ -24,9 +24,7 @@ export function TransactionList({ transactions, onRemove }: Props) {
     );
   }
 
-  const sorted = [...transactions].sort((a, b) =>
-    b.date === a.date ? 0 : b.date < a.date ? -1 : 1,
-  );
+  const sorted = [...transactions].sort((a, b) => b.date.localeCompare(a.date));
 
   return (
     <section className="list">
