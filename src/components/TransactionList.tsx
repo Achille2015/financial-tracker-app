@@ -14,12 +14,25 @@ function formatAmount(t: Transaction): string {
   }).format(t.amount)}`;
 }
 
+function formatDate(iso: string): string {
+  // Parse YYYY-MM-DD without timezone shift
+  const [y, m, d] = iso.split("-").map(Number);
+  if (!y || !m || !d) return iso;
+  const date = new Date(y, m - 1, d);
+  return date.toLocaleDateString(undefined, {
+    month: "short",
+    day: "numeric",
+  });
+}
+
 export function TransactionList({ transactions, onRemove }: Props) {
   if (transactions.length === 0) {
     return (
       <section className="list">
         <h2 className="list__title">Transactions</h2>
-        <p className="list__empty">No transactions yet. Add your first one!</p>
+        <p className="list__empty">
+          No transactions yet. Add your first one using the form above.
+        </p>
       </section>
     );
   }
@@ -28,7 +41,9 @@ export function TransactionList({ transactions, onRemove }: Props) {
 
   return (
     <section className="list">
-      <h2 className="list__title">Transactions</h2>
+      <h2 className="list__title">
+        Transactions <span className="list__count">({transactions.length})</span>
+      </h2>
       <ul className="list__items">
         {sorted.map((t) => (
           <li key={t.id} className="row">
@@ -43,7 +58,7 @@ export function TransactionList({ transactions, onRemove }: Props) {
                 <span className="row__desc">{t.description}</span>
               )}
             </div>
-            <span className="row__date">{t.date}</span>
+            <span className="row__date">{formatDate(t.date)}</span>
             <span
               className={`row__amount row__amount--${t.kind}`}
             >
@@ -53,7 +68,8 @@ export function TransactionList({ transactions, onRemove }: Props) {
               type="button"
               className="row__delete"
               onClick={() => onRemove(t.id)}
-              aria-label="Delete transaction"
+              aria-label={`Delete ${t.category} transaction of ${formatAmount(t)}`}
+              title="Delete transaction"
             >
               ×
             </button>

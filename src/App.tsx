@@ -79,8 +79,14 @@ export default function App() {
             <h1>Budget Tracker</h1>
             <p>Track your income and expenses in one place.</p>
           </div>
-          <button className="theme-toggle" onClick={toggle} aria-label="Toggle dark mode">
-            {dark ? "☀ Light" : "☽ Dark"}
+          <button
+            className="theme-toggle"
+            onClick={toggle}
+            aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
+            title={dark ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            <span aria-hidden>{dark ? "☀" : "☾"}</span>
+            <span>{dark ? "Light" : "Dark"}</span>
           </button>
         </div>
         {import.meta.env.DEV && (

@@ -47,10 +47,15 @@ export function BudgetBar({ transactions, budget, month, onSetBudget }: Props) {
     setEditing(true);
   };
 
+  const remaining = budget - spent;
+
   return (
     <section className="budget">
       <div className="budget__header">
-        <span className="budget__month">{monthLabel(month)} Budget</span>
+        <div className="budget__title-group">
+          <span className="budget__eyebrow">Monthly budget</span>
+          <span className="budget__month">{monthLabel(month)}</span>
+        </div>
 
         {editing ? (
           <div className="budget__edit">
@@ -66,10 +71,17 @@ export function BudgetBar({ transactions, budget, month, onSetBudget }: Props) {
                 if (e.key === "Enter") handleSave();
                 if (e.key === "Escape") setEditing(false);
               }}
-              placeholder="Enter amount"
+              placeholder="Amount"
+              aria-label="Budget amount"
             />
             <button className="budget__btn" onClick={handleSave}>Save</button>
-            <button className="budget__btn budget__btn--cancel" onClick={() => setEditing(false)}>✕</button>
+            <button
+              className="budget__btn budget__btn--cancel"
+              onClick={() => setEditing(false)}
+              aria-label="Cancel"
+            >
+              ✕
+            </button>
           </div>
         ) : (
           <button className="budget__set-btn" onClick={startEdit}>
@@ -80,7 +92,13 @@ export function BudgetBar({ transactions, budget, month, onSetBudget }: Props) {
 
       {budget > 0 ? (
         <>
-          <div className="budget__bar-track">
+          <div
+            className="budget__bar-track"
+            role="progressbar"
+            aria-valuemin={0}
+            aria-valuemax={budget}
+            aria-valuenow={Math.min(spent, budget)}
+          >
             <div
               className={`budget__bar-fill${over ? " budget__bar-fill--over" : warn ? " budget__bar-fill--warn" : ""}`}
               style={{ width: `${pct}%` }}
@@ -88,10 +106,13 @@ export function BudgetBar({ transactions, budget, month, onSetBudget }: Props) {
           </div>
           <div className="budget__stats">
             <span className={over ? "budget__overspent" : ""}>
-              {over && "Over budget! "}
-              {formatCurrency(spent)} spent
+              {formatCurrency(spent)} <span className="budget__stats-muted">spent of {formatCurrency(budget)}</span>
             </span>
-            <span className="budget__limit">of {formatCurrency(budget)}</span>
+            <span className={over ? "budget__overspent" : "budget__remaining"}>
+              {over
+                ? `${formatCurrency(Math.abs(remaining))} over`
+                : `${formatCurrency(remaining)} left`}
+            </span>
           </div>
         </>
       ) : (
